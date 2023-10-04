@@ -81,7 +81,7 @@
       (integerp a)
       (integerp b)
       (not (zerop b))
-      (a/b)
+      (/ a b)
       )
 )
 
