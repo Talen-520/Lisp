@@ -1,3 +1,4 @@
+;;; Tao Hu
 ;;; Solution to Problem 1
 (defun MIN-2 (A B)
   (cond
