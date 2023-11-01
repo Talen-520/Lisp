@@ -27,9 +27,15 @@
     (t (INDEX(- N 1)(CDR L)))))
     
 ;;;solution to problem 2
-(defun MIN-FIRST (L)                           
-  (cond
-    ((null L) 'ERROR)
-    (t 
-     (let ((X (ssort L))) ;; helping function ssort is from problem 3 which sort list in ascending order
-       (cons (car X) (remove (car X) L :count 1))))));;remove first occurrence element in the list L 
+(defun min-first (L)
+  (let ((min-val (apply #'min L))) ;;; min is built-in function to get min value of the list
+    (if (eql (car L) min-val)
+        L
+        (cons min-val (remove min-val L :count 1)))))
+
+;;;solution to problem 3
+(defun SSORT(L)
+  (if (endp L)  
+      nil
+      (let ((X (min-first L)))
+      (cons (car X) (SSORT (cdr X))))))
