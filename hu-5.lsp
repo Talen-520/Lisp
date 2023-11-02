@@ -69,15 +69,36 @@
                      (msort second-half)))))  ; recursively sort the second half
 
 ;;;solution to problem 7
-;;;solution to problem 7 a
-
 (defun REMOVE-ADJ-DUPL (L);;;(a b a c)
-  (cond
-   ((null L) NIL)                                     ; If the list is empty, return NIL
-   ((null (cdr L)) L)                                 ; If there's only one element left, return it
-   ((eql (car L) (car (cdr L))) (remove-adj-dupl (cdr L)))  ; If this element is same as next, skip this one
-   (t (cons (car L) (remove-adj-dupl (cdr L))))))     ; Otherwise, keep this element and proceed
+    (cond
+       ((endp L) NIL)                                     ; If the list is empty, return NIL
+       ((endp (cdr L)) L)                                 ; If there's only one element left, return it
+       ((eql (car L) (car (cdr L))) (remove-adj-dupl (cdr L)))  ; If this element is same as next, skip this one
+       (t (cons (car L) (remove-adj-dupl (cdr L))))))
 
-(defun UNREPEATED-ELTS (L)
+;;;solution to problem 8
+(defun UNREPEATED-ELTS (L) ;;;in the book input (a b a a a c c) output is (a b) I assume this is error,the expected output should be b
+  (if (null lst)
+      '()
+      (let* ((current-elem (car lst))
+             (rest (cdr lst)))
+        (if (not (member current-elem rest))
+            (cons current-elem (UNREPEATED-ELTS rest))
+            (UNREPEATED-ELTS rest)))))
 
-)
+;;;solution to problem 9
+(defun REPEATED-ELTS (L)
+  (if (null L)
+      '()
+      (if (member (car L) (cdr L))
+          (cons (car L) (REPEATED-ELTS (remove (car L) (cdr L))))
+          (REPEATED-ELTS (cdr L)))))
+
+;;;solution to problem 10
+(defun COUNT-REPETITIONS (L)
+  (if (null lst)
+      '()
+      (let* ((current-elem (car lst))
+             (rest (cdr lst))
+             (count (count current-elem lst)))
+        (cons (list count current-elem) (count-repeated-elements (remove current-elem lst))))))
