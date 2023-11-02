@@ -39,3 +39,45 @@
       nil
       (let ((X (min-first L)))
       (cons (car X) (SSORT (cdr X))))))
+      
+;;;solution to problem 4
+(defun qsort (L)
+  (if (endp L)
+      NIL
+      (let ((pL (partition (cdr L) (car L)))) ;;;return two list ( < car L) (>= car l)
+      (append (qsort(car pL))
+              (list (car L))
+              (qsort(cadr pL))))))
+
+;;;solution to problem 5
+(defun merge-lists (L1 L2)
+  (cond ((null L1) L2)                     
+        ((null L2) L1)                   
+        ((< (car L1) (car L2))
+         (cons (car L1) (merge-lists (cdr L1) L2))) 
+        (t
+         (cons (car L2) (merge-lists L1 (cdr L2)))))) 
+
+;;;solution to problem 6
+(defun msort (L)
+  (if (or (endp L) (endp (cdr L)))  ; base case: L is empty or has only one element
+      L
+      (let* ((split-result (split-list L))  ; split the list into two halves
+             (first-half (car split-result))
+             (second-half (cadr split-result)))
+        (merge-lists (msort first-half)  ; recursively sort the first half
+                     (msort second-half)))))  ; recursively sort the second half
+
+;;;solution to problem 7
+;;;solution to problem 7 a
+
+(defun REMOVE-ADJ-DUPL (L);;;(a b a c)
+  (cond
+   ((null L) NIL)                                     ; If the list is empty, return NIL
+   ((null (cdr L)) L)                                 ; If there's only one element left, return it
+   ((eql (car L) (car (cdr L))) (remove-adj-dupl (cdr L)))  ; If this element is same as next, skip this one
+   (t (cons (car L) (remove-adj-dupl (cdr L))))))     ; Otherwise, keep this element and proceed
+
+(defun UNREPEATED-ELTS (L)
+
+)
