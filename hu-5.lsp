@@ -60,19 +60,19 @@
 
 ;;;solution to problem 6
 (defun msort (L)
-  (if (or (endp L) (endp (cdr L)))  ; base case: L is empty or has only one element
+  (if (or (endp L) (endp (cdr L)))   
       L
       (let* ((split-result (split-list L))  ; split the list into two halves
              (first-half (car split-result))
              (second-half (cadr split-result)))
-        (merge-lists (msort first-half)  ; recursively sort the first half
-                     (msort second-half)))))  ; recursively sort the second half
+        (merge-lists (msort first-half)   
+                     (msort second-half)))))   
 
 ;;;solution to problem 7
 (defun REMOVE-ADJ-DUPL (L);;;(a b a c)
     (cond
        ((endp L) NIL)                                     ; If the list is empty, return NIL
-       ((endp (cdr L)) L)                                 ; If there's only one element left, return it
+       ((endp (cdr L)) L)                                  
        ((eql (car L) (car (cdr L))) (remove-adj-dupl (cdr L)))  ; If this element is same as next, skip this one
        (t (cons (car L) (remove-adj-dupl (cdr L))))))
 
@@ -116,7 +116,7 @@
 ;;;solution to problem 12
 (defun OUR-SOME (func L)
   (if (null L)
-      nil ; If the list is empty, return nil.
+      nil  
       (let ((curr (car L))
             (rest (cdr L)))
         (if (funcall func curr)
@@ -130,7 +130,7 @@
       (let ((curr (car L))
             (rest (cdr L)))
         (if (funcall func curr)
-            (OUR-EVERY func rest) ; Continue checking the rest of the list.
+            (OUR-EVERY func rest)  
             nil)))) ; If the function returns false, return nil.
 ;;;solution to problem 13
 ;;;modified partition 
